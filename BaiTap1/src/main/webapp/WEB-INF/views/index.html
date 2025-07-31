@@ -1,20 +1,98 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Customer List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f6fa;
+      padding: 40px;
+    }
+
+    h3 {
+      color: #2c3e50;
+    }
+
+    a {
+      text-decoration: none;
+      color: #007bff;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .top-actions {
+      margin-bottom: 20px;
+    }
+
+    .notify {
+      margin-bottom: 20px;
+      color: #28a745;
+      font-weight: bold;
+    }
+
+    .language-switch {
+      margin-bottom: 20px;
+    }
+
+    #customers {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    #customers th, #customers td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #dee2e6;
+      text-align: left;
+    }
+
+    #customers thead {
+      background-color: #343a40;
+      color: white;
+    }
+
+    #customers tbody tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .action-links a {
+      margin-right: 10px;
+      color: #007bff;
+    }
+
+    .action-links a:hover {
+      color: #0056b3;
+    }
+  </style>
 </head>
 <body>
-<h3 th:text="#{title.customer}"></h3>
-<p>
-  <a th:href="@{/customers/create}" th:text="#{title.create}"></a>
-</p>
-Language: <a href="/customers?lang=en">English</a>||<a href="/customers?lang=vi">Viet Nam</a>
+
+<h3 th:text="#{title.customer}">Customer List</h3>
+
+<div class="top-actions">
+  <p>
+    <a th:href="@{/customers/create}" th:text="#{title.create}">Create New Customer</a>
+  </p>
+</div>
+
+<div class="language-switch">
+  Language:
+  <a href="/customers?lang=en">English</a> |
+  <a href="/customers?lang=vi">Việt Nam</a>
+</div>
+
 <div class="notify">
   <div th:if="${success}">
-    <span th:text="#{delete.success}"></span>
+    ✅ <span th:text="#{delete.success}">Customer deleted successfully.</span>
   </div>
 </div>
+
 <table id="customers">
   <thead>
   <tr>
@@ -25,18 +103,24 @@ Language: <a href="/customers?lang=en">English</a>||<a href="/customers?lang=vi"
     <th th:text="#{table.delete}">Delete</th>
     <th th:text="#{table.view}">View</th>
   </tr>
-
   </thead>
   <tbody>
-  <tr th:each="row,rowstats : ${customers}">
-    <td th:text="${row.getName()}"></td>
-    <td th:text="${row.getEmail()}"></td>
-    <td th:text="${row.getAddress()}"></td>
-    <td><a th:href="@{/customers/{id}/edit(id=${row.getId()})}">Edit</a></td>
-    <td><a th:href="@{/customers/{id}/delete(id=${row.getId()})}">Delete</a></td>
-    <td><a th:href="@{/customers/{id}/view(id=${row.getId()})}">View</a></td>
+  <tr th:each="row : ${customers}">
+    <td th:text="${row.name}">Name</td>
+    <td th:text="${row.email}">Email</td>
+    <td th:text="${row.address}">Address</td>
+    <td class="action-links">
+      <a th:href="@{/customers/{id}/edit(id=${row.id})}" th:text="#{table.edit}">Edit</a>
+    </td>
+    <td class="action-links">
+      <a th:href="@{/customers/{id}/delete(id=${row.id})}" th:text="#{table.delete}">Delete</a>
+    </td>
+    <td class="action-links">
+      <a th:href="@{/customers/{id}/view(id=${row.id})}" th:text="#{table.view}">View</a>
+    </td>
   </tr>
   </tbody>
 </table>
+
 </body>
 </html>

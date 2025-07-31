@@ -1,28 +1,75 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Customer Detail</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+      color: #343a40;
+      margin-bottom: 20px;
+    }
+
+    .back-link {
+      margin-bottom: 20px;
+      display: inline-block;
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .cus-detail {
+      margin-bottom: 15px;
+    }
+
+    .cus-detail label:first-child {
+      font-weight: bold;
+      width: 120px;
+      display: inline-block;
+      color: #495057;
+    }
+
+    .cus-detail label:last-child {
+      color: #212529;
+    }
+  </style>
 </head>
 <body>
-<h3 th:text="#{view.lable}"></h3>
-<p>
-  <a th:href="@{/customers}" th:text="#{list.title}">
+<div class="container">
+  <h3 th:text="#{view.lable}">Customer Detail</h3>
 
-  </a>
-</p>
-<div id="detail">
-  <div class="cus-detail">
-    <label th:text="#{table.name}">Name:</label>
-    <label th:text="${customer.name}"></label>
-  </div>
-  <div class="cus-detail">
-    <label th:text="#{table.email}">Email:</label>
-    <label th:text="${customer.email}"></label>
-  </div>
-  <div class="cus-detail">
-    <label th:text="#{table.address}">Address:</label>
-    <label th:text="${customer.address}"></label>
+  <a th:href="@{/customers}" th:text="#{list.title}" class="back-link">Back to List</a>
+
+  <div id="detail">
+    <div class="cus-detail">
+      <label th:text="#{table.name}">Name:</label>
+      <label th:text="${customer.name}">Customer Name</label>
+    </div>
+    <div class="cus-detail">
+      <label th:text="#{table.email}">Email:</label>
+      <label th:text="${customer.email}">Customer Email</label>
+    </div>
+    <div class="cus-detail">
+      <label th:text="#{table.address}">Address:</label>
+      <label th:text="${customer.address}">Customer Address</label>
+    </div>
   </div>
 </div>
 </body>
