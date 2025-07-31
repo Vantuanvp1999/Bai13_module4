@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3 th:text="#{title.customer}"></h3>
+<p>
+  <a th:href="@{/customers/create}" th:text="#{title.create}"></a>
+</p>
+Language: <a href="/customers?lang=en">English</a>||<a href="/customers?lang=vi">Viet Nam</a>
+<div class="notify">
+  <div th:if="${success}">
+    <span th:text="#{delete.success}"></span>
+  </div>
+</div>
+<table id="customers">
+  <thead>
+  <tr>
+    <th th:text="#{table.name}">Name</th>
+    <th th:text="#{table.email}">Email</th>
+    <th th:text="#{table.address}">Address</th>
+    <th th:text="#{table.edit}">Edit</th>
+    <th th:text="#{table.delete}">Delete</th>
+    <th th:text="#{table.view}">View</th>
+  </tr>
+
+  </thead>
+  <tbody>
+  <tr th:each="row,rowstats : ${customers}">
+    <td th:text="${row.getName()}"></td>
+    <td th:text="${row.getEmail()}"></td>
+    <td th:text="${row.getAddress()}"></td>
+    <td><a th:href="@{/customers/{id}/edit(id=${row.getId()})}">Edit</a></td>
+    <td><a th:href="@{/customers/{id}/delete(id=${row.getId()})}">Delete</a></td>
+    <td><a th:href="@{/customers/{id}/view(id=${row.getId()})}">View</a></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
