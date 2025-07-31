@@ -81,12 +81,14 @@
   </p>
 </div>
 
-<div class="language-switch">
-  Language:
-  <a href="/customers?lang=en">English</a> |
-  <a href="/customers?lang=vi">Việt Nam</a>
-</div>
 
+<form method="get" th:action="@{/customers}">
+  <select name="lang"  onchange="this.form.submit()" >
+    <option value="" th:text="#{select.language}">select language</option>
+    <option value="en" th:selected="${#locale.language == 'en'}"> English</option>
+    <option value="vi" th:selected="${#locale.language == 'vi'}"> Viet Nam</option>
+  </select>
+</form>
 <div class="notify">
   <div th:if="${success}">
     ✅ <span th:text="#{delete.success}">Customer deleted successfully.</span>
